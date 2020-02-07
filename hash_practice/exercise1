@@ -1,0 +1,34 @@
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Iterator;
+
+class Solution {
+    public String solution(String[] participant, String[] completion) {
+        String answer = "";
+        Map hashMap = new HashMap();
+        
+        for(int i=0;i<participant.length;i++){
+            if( hashMap.containsKey(participant[i])){
+                hashMap.put(participant[i], (int)hashMap.get(participant[i])+1);
+            }else{
+                hashMap.put(participant[i], 0);
+            }
+        }
+        
+        for(int i=0;i<completion.length;i++){
+            int count = (int)hashMap.get(completion[i]);
+            if(count < 1){
+                hashMap.remove(completion[i]);
+            }else{
+                hashMap.put(completion[i], --count);
+            }
+        }
+        
+        Iterator<String> key = hashMap.keySet().iterator();
+        while(key.hasNext()){
+            answer = key.next();
+        }
+        
+        return answer;
+    }
+}
