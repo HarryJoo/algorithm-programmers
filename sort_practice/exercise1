@@ -1,0 +1,41 @@
+class Solution {
+    public int[] solution(int[] array, int[][] commands) {
+        //answer
+        int[] answer = new int[commands.length];
+        int answerIndex = 0;
+        
+        //1.commmands의 길이만큼 반복
+        for(int x=0; x<commands.length; x++){
+            //commands의 i,j,k
+            int i = commands[x][0];
+            int j = commands[x][1];
+            int k = commands[x][2] - 1;
+            
+            //array2 배열
+            int[] array2 = new int[j - i + 1];
+
+            //2.i번째부터 j번째까지 자른 값을 array2에 할당
+            int a = 0;
+            for(int y=i-1; y<j; y++){
+                array2[a] = array[y];
+                a++;
+            }
+            
+            //3.array2 정렬(버블정렬 사용함)
+            for(int z=0; z<array2.length-1; z++){
+                for(int w=0; w<array2.length-z-1; w++){
+                    if(array2[w] > array2[w+1]){
+                        int temp = array2[w];
+                        array2[w] = array2[w+1];
+                        array2[w+1] = temp;
+                    }
+                }
+            }
+
+            //4.k번째 숫자 조회 & answer에 결과 할당
+            answer[answerIndex] = array2[k];
+            answerIndex++;
+        }     
+        return answer;
+    }
+}
